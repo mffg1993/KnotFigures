@@ -6,7 +6,7 @@ Basic Mathematica notebooks for producing publication-quality illustrations of k
 
 - `Braid stuff.nb` — notebook exploring braid representations and figure creation  
 - `Derivations .nb` — derivations and helper cells used for figure construction  
-- `Figures-EncryptingPrimeNumbers.nb` — Example of figures used [this preprint](https://arxiv.org/abs/2212.04350))
+- `Figures-EncryptingPrimeNumbers.nb` — Example of figures used [this preprint](https://arxiv.org/abs/2212.04350)
 - Exported previews: `Braid stuff.pdf`, `Derivations_notebook.pdf`, `Figures-EncryptingPrimeNumbers.pdf`  
 - `LICENSE` — GPL-3.0 license  
 - `README.md` — this file  
