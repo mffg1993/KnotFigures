@@ -28,7 +28,7 @@ Figures from this repository have been used in the following works:
 
 - [Ferrer-Garcia, Manuel F., et al. (2021) *Polychromatic electric field knots.* Physical Review Research 3.3 (2021): 033226.](https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.3.033226) 
 - [Ferrer-García, M. F., et al. (2022). *Secure communication using low dimensional topological elements*. arXiv:2212.04350](https://arxiv.org/abs/2212.04350) 
-- [Ferrer-García, M. F. (2024). *Structuring Light: From Knots to Geometrical Phases*. Doctoral Thesis] (https://ruor.uottawa.ca/items/52c7e55e-765c-469c-86d4-c253824a86b5)   
+- [Ferrer-García, M. F. (2024). *Structuring Light: From Knots to Geometrical Phases*. Doctoral Thesis](https://ruor.uottawa.ca/items/52c7e55e-765c-469c-86d4-c253824a86b5)   
 
 
 ## 📄 License
