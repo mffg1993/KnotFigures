@@ -10,22 +10,20 @@
  
 - **Alexander's Theorem:** *"Every oriented knot or link can be represented by a closed braid "*
 
-- 
-
 ## Lemniscate Knots  
 
 This notebook stands as an implementation of the work by Bode et al. [1] on the properties of the lemniscate knots. 
 
-In the transverse plane to the braids height, the *s* strands trace a lemniscate curve - a $(1,\ell )$ Lissajous Curve parametrized by $h\in [0,2\pi ]$. Therefore, we can write the parametric curve for the *j*-th strand as
+In the transverse plane to the braids height, the *s* strands trace a lemniscate curve - a $(1,\ell )$ Lissajous Curve parametrized by $h$ in $ [0,2\pi ]$. Therefore, we can write the parametric curve for the $j$-th strand as
 
 $$ S_j^{s,r,\ell}(h; a, b) =
 \left(
-  a \cos\!\left[\tfrac{1}{s}\big(rh + 2\pi (j - 1)\big)\right],
-  \tfrac{b}{\ell} \sin\!\left[\tfrac{\ell}{s}\big(rh + 2\pi (j - 1)\big)\right],
+  a \cos\left[\tfrac{1}{s}\big(rh + 2\pi (j - 1)\big)\right],
+  \tfrac{b}{\ell} \sin\left[\tfrac{\ell}{s}\big(rh + 2\pi (j - 1)\big)\right],
   h
 \right)$$
 
-where $a,b\in \mathbb{R}$are stretching factors.  The closure of the braid is parametrized as 
+where $a,b$ in $\mathbb{R}$ are stretching factors.  The closure of the braid is parametrized as 
 
 													    $\left( \text{Cos}[h]\left\{ R+a \text{Cos}\left[\frac{1}{s}\{\text{rh}+2\pi (j-1)\}\right]\right\}, \text{Sin}[h]\left\{ R+a \text{Cos}\left[\frac{1}{s}\{\text{rh}+2\pi (j-1)\}\right]\right\},\left\{\frac{b}{\ell }\text{Sin}\left[\frac{\ell }{s}\{\text{rh}+2\pi (j-1)\}\right]\right\} \right)$
 
