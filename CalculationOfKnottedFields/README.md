@@ -45,7 +45,7 @@ p_h^{s,r,\ell}(u)
 = \prod_{j=1}^{s} \!\left[\, u - Z_j^{s,r,\ell}(h) \,\right]
 $$
 
-where we had parametrized $Z_j{}^{s,r,\ell }(h)= a \text{Cos}\left[\frac{1}{s}\{\text{rh}+2\pi (j-1)\}\right]+ i\frac{b}{\ell }\text{Sin}\left[\frac{\ell }{s}\{\text{rh}+2\pi (j-1)\}\right]$. The semiholomorphic map $f\left(u,v,\bar{v}\right)$ with knotted zero line is fond by the replacements, in $p_h{}^{s,r,\ell }(u)$, $\exp (i h)\text{-$>$}v$ and $\exp (-i h)\text{-$>$}\bar{v}$ . The mapping to the complex plane can be obtained by considering the substitutions 
+where we had parametrized $Z_j{}^{s,r,\ell }(h)= a \text{Cos}\left[\frac{1}{s}\{\text{rh}+2\pi (j-1)\}\right]+ i\frac{b}{\ell }\text{Sin}\left[\frac{\ell }{s}\{\text{rh}+2\pi (j-1)\}\right]$. The semiholomorphic map $\left(u,v,\bar{v}\right)$ with knotted zero line is fond by the replacements, in $p_h{}^{s,r,\ell }(u)$, $\exp (i h)\text{-$>$}v$ and $\exp (-i h)\text{-$>$}\bar{v}$ . The mapping to the complex plane can be obtained by considering the substitutions 
 																		$u\text{-$>$}\frac{\rho ^2-1}{\rho ^2+1},\text{          }v\text{-$>$}\frac{2 \rho \text{  }\exp [\text{i$\phi $}]}{\rho ^2+1},\text{          }\bar{v}\text{-$>$}\frac{2 \rho \text{  }\exp [-\text{i$\phi $}]}{\rho ^2+1}$
 
 From here, we can obtained the complex polynomial in the complex plane from the numerator of $p_h{}^{s,r,\ell }\left(u,v,\bar{v}\right)\text{-$>$}p_h{}^{s,r,\ell }(\rho ,\phi )$.
