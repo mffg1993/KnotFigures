@@ -26,10 +26,10 @@ $$ S_j^{s,r,\ell}(h; a, b) =
 where $a,b$ in $\mathbb{R}$ are stretching factors.  The closure of the braid is parametrized as 
 
 $$
-\left(
-  \cos(h)\left[ R + a \cos\!\left(\tfrac{1}{s}\big(rh + 2\pi (j - 1)\big)\right) \right],
-  \sin(h)\left[ R + a \cos\!\left(\tfrac{1}{s}\big(rh + 2\pi (j - 1)\big)\right) \right],
-  \tfrac{b}{\ell} \sin\left(\tfrac{\ell}{s}\big(rh + 2\pi (j - 1)\big)\right)
+\left(\\
+  \cos(h)\left[ R + a \cos\!\left(\tfrac{1}{s}\big(rh + 2\pi (j - 1)\big)\right) \right],\\
+  \sin(h)\left[ R + a \cos\!\left(\tfrac{1}{s}\big(rh + 2\pi (j - 1)\big)\right) \right],\\
+  \tfrac{b}{\ell} \sin\left(\tfrac{\ell}{s}\big(rh + 2\pi (j - 1)\big)\right)\\
 \right)
 $$
 
