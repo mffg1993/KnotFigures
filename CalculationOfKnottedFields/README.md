@@ -2,19 +2,28 @@
 
 ### Basic definitions 
 
-**Knot** - It is a closed, non-self-intersecting curve embedded in three dimensions.  
+- **Knot:** It is a closed, non-self-intersecting curve embedded in three dimensions.
 
-**Braid** -  ****A braid in n strands is defined as a set of *n* non-intersecting smooth lines joining two parallel planes.
+- **Strand:** Continuous curve segment between two crossings in a knot diagram.
+
+- **Braid:**  ****A braid in n strands is defined as a set of *n* non-intersecting smooth lines joining two parallel planes.
  
-Alexander's Theorem: *"Every oriented knot or link can be represented by a closed braid "*
+- **Alexander's Theorem:** *"Every oriented knot or link can be represented by a closed braid "*
 
-### Lemniscate Knots  
+- 
+
+## Lemniscate Knots  
 
 This notebook stands as an implementation of the work by Bode et al. [1] on the properties of the lemniscate knots. 
 
 In the transverse plane to the braids height, the *s* strands trace a lemniscate curve - a $(1,\ell )$ Lissajous Curve parametrized by $h\in [0,2\pi ]$. Therefore, we can write the parametric curve for the *j*-th strand as
 
-$\text{                                                                                                                                       }S_j{}^{s,r,\ell }(h;a,b)= \left( a \text{Cos}\left[\frac{1}{s}\{\text{rh}+2\pi (j-1)\}\right],\frac{b}{\ell }\text{Sin}\left[\frac{\ell }{s}\{\text{rh}+2\pi (j-1)\}\right], h \right)$
+$ S_j^{s,r,\ell}(h; a, b) =
+\left(
+  a \cos\!\left[\tfrac{1}{s}\big(rh + 2\pi (j - 1)\big)\right],
+  \tfrac{b}{\ell} \sin\!\left[\tfrac{\ell}{s}\big(rh + 2\pi (j - 1)\big)\right],
+  h
+\right)$
 
 where $a,b\in \mathbb{R}$are stretching factors.  The closure of the braid is parametrized as 
 
