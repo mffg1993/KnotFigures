@@ -1,4 +1,4 @@
-# Introduction to Optical knots 
+# Calculation of the Field for creating Singular Knotted Skeletons using Structured Light 
 
 ### Basic definitions 
 
