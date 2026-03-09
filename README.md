@@ -2,7 +2,7 @@
 
 Basic Mathematica notebooks for producing publication-quality illustrations of knots and braids. The notebooks show compact patterns, derivations, and figure-generation workflows; PDFs are included for quick preview
 
-## ✨ What’s inside
+## What’s inside
 
 - `Braid stuff.nb` — notebook exploring braid representations and figure creation  
 - `Derivations .nb` — derivations and helper cells used for figure construction  
@@ -14,7 +14,7 @@ Basic Mathematica notebooks for producing publication-quality illustrations of k
 ---
 
 
-## 🖌️ Figure tips
+## Figure tips
 
 Define a consistent color palette and line thickness.
 
@@ -22,7 +22,7 @@ Export at high resolution: ImageResolution -> 300.
 
 Prefer vector (PDF/SVG) exports for publications.
 
-## 📚 Works using KnotFigures
+## Works using KnotFigures
 
 Figures from this repository have been used in the following works:
 
@@ -31,15 +31,15 @@ Figures from this repository have been used in the following works:
 - [Ferrer-García, M. F. (2024). *Structuring Light: From Knots to Geometrical Phases*. Doctoral Thesis](https://ruor.uottawa.ca/items/52c7e55e-765c-469c-86d4-c253824a86b5)   
 
 
-## 📄 License
+## License
 
 This project is released under the GPL-3.0 License. See LICENSE.
 
-## 🙌 Contributing
+## Contributing
 
 Issues and PRs are welcome — especially examples of new knot/ braid figure styles, parameterized figure generators, or utility functions. Please keep contributions self-contained (pure Mathematica) and include an example cell.
 
-## 📣 Cite / Acknowledge
+## Cite / Acknowledge
 
 If these figures help your work, a link back to the repo is appreciated:
 
