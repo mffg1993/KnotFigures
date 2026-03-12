@@ -1,0 +1,58 @@
+name: Clean notebooks
+
+on:
+  push:
+    paths:
+      - "**.ipynb"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Remove broken widget metadata
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          changed_any = False
+
+          for path in Path(".").rglob("*.ipynb"):
+              with open(path, "r", encoding="utf-8") as f:
+                  nb = json.load(f)
+
+              changed = False
+
+              if "metadata" in nb and "widgets" in nb["metadata"]:
+                  del nb["metadata"]["widgets"]
+                  changed = True
+
+              if changed:
+                  with open(path, "w", encoding="utf-8") as f:
+                      json.dump(nb, f, indent=1, ensure_ascii=False)
+                      f.write("\n")
+                  print(f"Cleaned {path}")
+                  changed_any = True
+
+          if not changed_any:
+              print("No notebook widget metadata found.")
+          PY
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "*.ipynb"
+          message: "Clean notebook metadata"
