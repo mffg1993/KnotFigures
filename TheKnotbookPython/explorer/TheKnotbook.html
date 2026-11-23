@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Knotbook · Geometry explorer</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f8fa;color:#202837;font:16px/1.5 Inter,system-ui,sans-serif}header{background:white;border-bottom:1px solid #dae2e4;padding:16px 5%;display:flex;align-items:center;justify-content:space-between}header strong{font-size:20px;letter-spacing:-.05em}a{color:#116c68}main{max-width:1420px;margin:auto;padding:30px 5%}h1{font-size:clamp(30px,4vw,48px);letter-spacing:-.055em;line-height:1.1;margin:0}p{color:#576674}main>p{margin:9px 0 24px}.workspace{display:grid;grid-template-columns:245px minmax(0,1fr);gap:20px}aside,article{background:white;border:1px solid #dbe3e6;border-radius:12px;overflow:hidden}aside{padding:20px;height:fit-content}h2{margin:0;font-size:20px;letter-spacing:-.035em}label{display:block;margin:18px 0 6px}select,button{font:inherit;border:1px solid #c8d4d8;border-radius:6px;background:white;padding:7px 10px;color:inherit}button{cursor:pointer}select,input{width:100%;accent-color:#187970}output{float:right;font-variant-numeric:tabular-nums}nav{display:flex;gap:6px;margin-bottom:12px}button[aria-pressed=true]{background:#dceeea;border-color:#a2cdc4;color:#135e57}article>div{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}canvas{display:block;width:100%;height:clamp(300px,49vh,540px);background:#fafcfc;touch-action:none;cursor:grab}canvas:active{cursor:grabbing}small{color:#596873}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}#legend{display:flex;gap:14px}details{margin-top:14px;color:#526372}summary{cursor:pointer;color:#27394a}aside p{font-size:14px;border-top:1px solid #dde5e7;padding-top:14px;margin-bottom:0}@media(max-width:740px){main{padding:20px 4%}.workspace{grid-template-columns:1fr}aside{order:2}header{padding:12px 4%}canvas{height:340px}}
+</style></head><body><header><strong>The Knotbook</strong><a href="https://github.com/mffg1993/KnotFigures/blob/main/TheKnotbookPython/TheKnotbook_IntroductionToOpticalKnots.ipynb">Open notebook ↗</a></header>
+<main><h1>Knot geometry explorer</h1><p>Follow a lemniscate braid from its open strands to a closed knot or link.</p>
+<div class="workspace"><aside><h2>Construction</h2><label for="preset">Example</label><select id="preset"><option>Trefoil knot</option><option>Hopf link</option><option>Cinquefoil knot</option><option>Figure-eight knot</option></select>
+<p id="parameters"></p><label for="width">Tube radius <output id="amount"></output></label><input type="range" id="width" min="0.035" max="0.16" value="0.105" step="0.005"><p>Color follows each connected component through the closure.</p></aside>
+<section><nav aria-label="Geometry"><button id="open">Open braid</button><button id="closed">Closed braid</button></nav><article><div><h2 id="heading"></h2><button id="reset">Reset view</button></div><canvas id="scene" tabindex="0" aria-label="Interactive tubular braid. Drag or use arrow keys to rotate."></canvas><div><small id="legend"></small><small>Drag or use arrow keys to rotate</small></div></article>
+<details><summary>Construction equations</summary><p>For strand j = 0, …, s − 1 and height h ∈ [0, 2π], set θ = (rh + 2πj)/s. The open strand follows (x, y, h), with x = a cos θ and y = (b/ℓ) sin(ℓθ). Closure maps it to ((R + x) cos h, (R + x) sin h, y). Here a = b = 1 and R = 2, leaving a hole through the center of the closed braid.</p></details></section></div></main>
+<script>
+'use strict';
+const get=id=>document.getElementById(id);
+const scene=get('scene'), ctx=scene.getContext('2d');
+const cases=[[2,3,1],[2,2,1],[2,5,1],[3,2,2]];
+const colors=[[24,151,145],[223,112,54]];
+let closed=true,yaw,pitch,pending=false;
+function reset(){yaw=closed?0.35:0.2;pitch=closed?0.85:0.18;schedule();}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+function draw(){
+ pending=false;
+ const [s,r,l]=cases[get('preset').selectedIndex];
+ const w=scene.width=Math.round(scene.clientWidth), h=scene.height=Math.round(scene.clientHeight);
+ if(!w||!h)return;
+ const image=ctx.createImageData(w,h), depth=new Float32Array(w*h).fill(-Infinity);
+ const scale=Math.min(w,h)/(closed?7.3:7.6), radius=scale*Number(get('width').value);
+ // For each projected segment, shade the front envelope of spheres along its axis.
+ function capsule(A,B,color){
+  const dx=B[0]-A[0],dy=B[1]-A[1],dz=B[2]-A[2],length=Math.hypot(dx,dy);
+  if(length<1e-8)return;
+  const ux=dx/length,uy=dy/length,slope=dz/length;
+  const xmin=Math.max(0,Math.floor(Math.min(A[0],B[0])-radius)),xmax=Math.min(w-1,Math.ceil(Math.max(A[0],B[0])+radius));
+  const ymin=Math.max(0,Math.floor(Math.min(A[1],B[1])-radius)),ymax=Math.min(h-1,Math.ceil(Math.max(A[1],B[1])+radius));
+  for(let y=ymin;y<=ymax;y++)for(let x=xmin;x<=xmax;x++){
+   const px=x-A[0],py=y-A[1],across=py*ux-px*uy, remaining=radius*radius-across*across;
+   if(remaining<0)continue;
+   const t=Math.max(0,Math.min(length,px*ux+py*uy+slope*Math.sqrt(remaining/(1+slope*slope))));
+   const nx=px-t*ux,ny=py-t*uy,nz2=radius*radius-nx*nx-ny*ny;
+   if(nz2<0)continue;
+   const nz=Math.sqrt(nz2),z=A[2]+t*slope+nz,index=y*w+x;
+   if(z<=depth[index])continue;
+   depth[index]=z;
+   const light=.52+.56*Math.max(0,(-.4*nx-.6*ny+.69*nz)/radius);
+   for(let k=0;k<3;k++)image.data[4*index+k]=color[k]*light;
+   image.data[4*index+3]=255;
+  }
+ }
+ for(let j=0;j<s;j++){
+  const color=colors[r%s===0?j:0];let previous;
+  for(let i=0;i<=240;i++){
+   const h0=2*Math.PI*i/240,theta=(r*h0+2*Math.PI*j)/s;
+   const u=Math.cos(theta),v=Math.sin(l*theta)/l;
+   const x=closed?(2+u)*Math.cos(h0):u,y=closed?(2+u)*Math.sin(h0):v,z=closed?v:h0-Math.PI;
+   const lateral=x*Math.cos(yaw)-y*Math.sin(yaw),forward=x*Math.sin(yaw)+y*Math.cos(yaw);
+   const point=[w/2+scale*lateral,h/2-scale*(z*Math.cos(pitch)-forward*Math.sin(pitch)),scale*(forward*Math.cos(pitch)+z*Math.sin(pitch))];
+   if(previous)capsule(previous,point,color);
+   previous=point;
+  }
+ }
+ ctx.putImageData(image,0,0);
+}
+function update(){
+ const preset=get('preset'),[s,r,l]=cases[preset.selectedIndex];
+ get('heading').textContent=closed?preset.value:'Open braid';
+ get('parameters').textContent=s+' strands · r = '+r+' · ℓ = '+l;
+ get('closed').setAttribute('aria-pressed',closed);get('open').setAttribute('aria-pressed',!closed);
+ get('amount').textContent=Number(get('width').value).toFixed(3);
+ get('legend').replaceChildren(...colors.slice(0,r%s===0?s:1).map((rgb,j)=>{
+  const item=document.createElement('span'),dot=document.createElement('i');dot.className='dot';dot.style.background='rgb('+rgb.join(',')+')';item.append(dot,'Component '+(j+1));return item;
+ }));schedule();
+}
+get('preset').onchange=update;get('width').oninput=update;get('reset').onclick=reset;
+for(const id of ['open','closed'])get(id).onclick=()=>{closed=id==='closed';update();reset();};
+scene.onpointerdown=e=>scene.setPointerCapture(e.pointerId);
+function rotate(dx,dy){yaw+=dx;pitch=Math.max(-1.56,Math.min(1.56,pitch+dy));schedule();}
+scene.onpointermove=e=>{if(scene.hasPointerCapture(e.pointerId))rotate(e.movementX*.009,e.movementY*.009);};
+scene.onkeydown=e=>{const delta={ArrowLeft:[-.1,0],ArrowRight:[.1,0],ArrowUp:[0,.1],ArrowDown:[0,-.1]}[e.key];if(delta){e.preventDefault();rotate(...delta);}};
+new ResizeObserver(schedule).observe(scene);update();reset();
+</script></body></html>
